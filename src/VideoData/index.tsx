@@ -8,35 +8,28 @@ interface Props {
 
 const VideoData: React.StatelessComponent<Props> = ({ kettle }): JSX.Element => {
   const { videoState } = kettle;
-  switch (videoState.kind) {
-    case 'initialized':
-      return <div>Initialized</div>;
-
-    case 'ready':
-      return <div>Ready to play</div>;
-
-    case 'playing':
+  return videoState.cata({
+    initialized: () => <div>Initialized</div>,
+    ready: () => <div>Ready to play</div>,
+    playing: ({ position, duration }) => {
       return (
         <div>
-          <div>Playing: {videoState.position.toFixed(0)}</div>
-          <div>Length: {videoState.duration.map(n => n.toFixed(0)).getOrElse('unknown')}</div>
+          <div>Playing: {position.map(n => n.toFixed(0)).getOrElse('unknown')}</div>
+          <div>Length: {duration.map(n => n.toFixed(0)).getOrElse('unknown')}</div>
         </div>
       );
-
-    case 'paused':
+    },
+    paused: ({ position, duration }) => {
       return (
         <div>
-          <div>Paused: {videoState.position.toFixed(0)}</div>
-          <div>Length: {videoState.duration.map(n => n.toFixed(0)).getOrElse('unknown')}</div>
+          <div>Paused: {position.map(n => n.toFixed(0)).getOrElse('unknown')}</div>
+          <div>Length: {duration.map(n => n.toFixed(0)).getOrElse('unknown')}</div>
         </div>
       );
-
-    case 'ended':
-      return <div>Ended</div>;
-
-    case 'buffering':
-      return <div>Buffering</div>;
-  }
+    },
+    ended: () => <div>Ended</div>,
+    buffering: () => <div>Buffering</div>,
+  });
 };
 
 export default observer(VideoData);

@@ -1,7 +1,7 @@
 import { observable, computed, action } from 'mobx';
 import Kettle from './../Kettle';
 import { reverse } from 'ramda';
-import { Maybe, fromNullable, nothing } from 'maybeasy';
+import { Maybe, fromNullable } from 'maybeasy';
 
 export interface Slide {
   id: number;
@@ -26,10 +26,9 @@ class Data {
 
   @computed
   get current(): Maybe<Slide> {
-    if (this.kettle.videoState.kind === 'initialized') return nothing();
-    const videoPos = this.kettle.videoState.position;
-    const current = reverse(this.visibleSlides).find(s => s.time <= videoPos);
-    return fromNullable(current);
+    return this.kettle.videoState.position
+      .map(pos => reverse(this.visibleSlides).find(s => s.time <= pos))
+      .andThen(fromNullable);
   }
 
   isCurrent(candidate: Slide): boolean {

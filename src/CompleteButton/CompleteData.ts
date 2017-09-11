@@ -7,9 +7,9 @@ class CompleteData {
     this.enabled = false;
     when(
       () => {
-        if (kettle.videoState.kind === 'initialized') return false;
-        const pos = kettle.videoState.position;
-        return kettle.videoState.duration.map(d => d - 10 < pos).getOrElse(false);
+        return kettle.videoState.position
+          .andThen(pos => kettle.videoState.duration.map(dur => dur - 10 < pos))
+          .getOrElse(false);
       },
       () => {
         this.enable();

@@ -3,11 +3,12 @@
  * with a currently playing video.
  */
 import { observable, action } from 'mobx';
-import { VideoState, VideoMessage, Seconds, seekTo } from './Types';
+import { VideoMessage, Seconds, seekTo } from './Messages';
+import VideoState, { Initialized } from './VideoState';
 import { Maybe, fromNullable } from 'maybeasy';
 
 class Kettle {
-  @observable videoState: VideoState = { kind: 'initialized' };
+  @observable videoState: VideoState = new Initialized();
   @observable videoMessage: VideoMessage[] = [];
 
   @action

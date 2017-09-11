@@ -28,11 +28,10 @@ class CommentaryData {
 
   @computed
   get current(): Commentary[] {
-    if (this.kettle.videoState.kind === 'initialized') {
-      return [];
-    }
-    const time = this.kettle.videoState.position;
-    return this.commentaries.filter(isCurrent(time)).sort(revSort);
+    return this.kettle.videoState.position
+      .map(pos => isCurrent(pos))
+      .map(fn => this.commentaries.filter(fn).sort(revSort))
+      .getOrElse([]);
   }
 }
 

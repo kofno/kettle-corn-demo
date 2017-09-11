@@ -4,15 +4,14 @@ import { observer } from 'mobx-react';
 import { Maybe, nothing, just } from 'maybeasy';
 import loadYouTube from './../YouTubeLoader';
 import Kettle from './../Kettle';
-import {
-  VideoState,
-  initialized,
-  ready,
-  buffering,
-  playing,
-  paused,
-  ended,
-} from './../Kettle/Types';
+import VideoState, {
+  Buffering,
+  Ready,
+  Playing,
+  Paused,
+  Ended,
+  Initialized,
+} from './../Kettle/VideoState';
 
 export const assertNever = (x: never): never => {
   throw new Error(`Unexpected object: ${x}`);
@@ -32,17 +31,17 @@ class YouTube extends React.Component<Props, {}> {
   mapState = (state: YT.PlayerState, position: number, duration: Maybe<number>): VideoState => {
     switch (state) {
       case YT.PlayerState.BUFFERING:
-        return buffering(position, duration);
+        return new Buffering(just(position), duration);
       case YT.PlayerState.CUED:
-        return ready(position, duration);
+        return new Ready(just(position), duration);
       case YT.PlayerState.ENDED:
-        return ended(position, duration);
+        return new Ended(just(position), duration);
       case YT.PlayerState.PAUSED:
-        return paused(position, duration);
+        return new Paused(just(position), duration);
       case YT.PlayerState.PLAYING:
-        return playing(position, duration);
+        return new Playing(just(position), duration);
       case YT.PlayerState.UNSTARTED:
-        return initialized();
+        return new Initialized();
     }
   };
 
