@@ -20,3 +20,6 @@ export const seekTo = (position: Seconds): VideoMessage => ({
   kind: 'seek-to',
   position,
 });
+
+export const play = (): VideoMessage => ({ kind: 'play' });
+export const pause = (): VideoMessage => ({ kind: 'pause' });

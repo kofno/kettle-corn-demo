@@ -46,8 +46,6 @@ class YouTube extends React.Component<Props, {}> {
   };
 
   updateKettle = (player: YT.Player) => {
-    // tslint:disable-next-line:no-console
-    console.log('update kettle');
     const { kettle } = this.props;
     const state = player.getPlayerState();
     const time = player.getCurrentTime();
