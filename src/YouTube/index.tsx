@@ -13,10 +13,6 @@ import VideoState, {
   Initialized,
 } from './../Kettle/VideoState';
 
-export const assertNever = (x: never): never => {
-  throw new Error(`Unexpected object: ${x}`);
-};
-
 export interface Props {
   id: string;
   className: string;
@@ -59,16 +55,11 @@ class YouTube extends React.Component<Props, {}> {
       () => kettle.videoMessage.length,
       (_length: number) => {
         kettle.popMessage().map(msg => {
-          switch (msg.kind) {
-            case 'play':
-              return player.playVideo();
-            case 'pause':
-              return player.pauseVideo();
-            case 'seek-to':
-              return player.seekTo(msg.position, true);
-            default:
-              return assertNever(msg);
-          }
+          msg.cata({
+            play: () => player.playVideo(),
+            pause: () => player.pauseVideo(),
+            seekTo: pos => player.seekTo(pos, true),
+          });
         });
       },
     );

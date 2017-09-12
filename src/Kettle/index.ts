@@ -3,7 +3,8 @@
  * with a currently playing video.
  */
 import { observable, action } from 'mobx';
-import { VideoMessage, Seconds, seekTo } from './Messages';
+import { VideoMessage, SeekTo } from './Messages';
+import { Seconds } from './Types';
 import VideoState, { Initialized } from './VideoState';
 import { Maybe, fromNullable } from 'maybeasy';
 
@@ -28,7 +29,7 @@ class Kettle {
 
   @action
   seekTo(time: Seconds) {
-    this.sendMessage(seekTo(time));
+    this.sendMessage(new SeekTo(time));
   }
 }
 

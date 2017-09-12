@@ -1,25 +1,36 @@
-export type Seconds = number;
+import { Seconds } from './Types';
 
-export interface Play {
-  kind: 'play';
+export interface Cata<T> {
+  play: () => T;
+  pause: () => T;
+  seekTo: (position: Seconds) => T;
 }
 
-export interface Pause {
-  kind: 'pause';
+export abstract class VideoMessage {
+  abstract cata<T>(fold: Cata<T>): T;
 }
 
-export interface SeekTo {
-  kind: 'seek-to';
-  position: Seconds;
+export class Play extends VideoMessage {
+  cata<T>(fold: Cata<T>): T {
+    return fold.play();
+  }
 }
 
-export type VideoMessage = Play | Pause | SeekTo;
+export class Pause extends VideoMessage {
+  cata<T>(fold: Cata<T>): T {
+    return fold.pause();
+  }
+}
 
-// -- Helpers
-export const seekTo = (position: Seconds): VideoMessage => ({
-  kind: 'seek-to',
-  position,
-});
+export class SeekTo extends VideoMessage {
+  readonly position: Seconds;
 
-export const play = (): VideoMessage => ({ kind: 'play' });
-export const pause = (): VideoMessage => ({ kind: 'pause' });
+  constructor(position: Seconds) {
+    super();
+    this.position = position;
+  }
+
+  cata<T>(fold: Cata<T>): T {
+    return fold.seekTo(this.position);
+  }
+}

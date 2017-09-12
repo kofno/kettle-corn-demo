@@ -1,4 +1,4 @@
-import { Seconds } from './../Messages';
+import { Seconds } from './../Types';
 import { Maybe, nothing } from 'maybeasy';
 
 export interface Timings {
