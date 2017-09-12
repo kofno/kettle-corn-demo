@@ -1,4 +1,4 @@
-import Kettle from './../Kettle';
+import { Kettle } from 'kettle-corn';
 import { observable, action, when } from 'mobx';
 
 class CompleteData {

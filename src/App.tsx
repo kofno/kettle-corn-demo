@@ -1,8 +1,7 @@
 import * as React from 'react';
 import './App.css';
 import { useStrict } from 'mobx';
-import YouTube from './YouTube';
-import Kettle from './Kettle';
+import { YouTube, Kettle } from 'kettle-corn';
 import VideoData from './VideoData';
 import CommentaryData, { Commentary } from './CommentaryData';
 import CommentaryView from './CommentaryView';

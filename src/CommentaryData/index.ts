@@ -1,5 +1,5 @@
 import { computed } from 'mobx';
-import Kettle from './../Kettle';
+import { Kettle } from 'kettle-corn';
 
 type Seconds = number;
 

@@ -1,5 +1,5 @@
 import { observable, computed, action } from 'mobx';
-import Kettle from './../Kettle';
+import { Kettle } from 'kettle-corn';
 import { reverse } from 'ramda';
 import { Maybe, fromNullable } from 'maybeasy';
 

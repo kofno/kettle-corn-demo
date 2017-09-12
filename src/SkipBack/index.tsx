@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { observer } from 'mobx-react';
-import Kettle from './../Kettle';
-import { SeekTo } from './../Kettle/Messages';
+import { Kettle } from 'kettle-corn';
+import { SeekTo } from 'kettle-corn/Kettle/Messages';
 
 const skipBack = (kettle: Kettle) => (): void => {
   kettle.videoState.position

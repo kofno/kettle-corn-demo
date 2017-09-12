@@ -1,5 +1,5 @@
 import * as React from 'react';
-import Kettle from './../Kettle';
+import { Kettle } from 'kettle-corn';
 import { observer } from 'mobx-react';
 
 interface Props {
