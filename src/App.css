@@ -18,6 +18,10 @@
   font-size: large;
 }
 
+.App-switcher {
+  padding: 5px;
+}
+
 .container {
   display: flex;
   justify-content: center;

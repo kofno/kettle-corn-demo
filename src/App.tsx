@@ -1,7 +1,8 @@
 import * as React from 'react';
 import './App.css';
 import { useStrict } from 'mobx';
-import { YouTube, Kettle } from 'kettle-corn';
+import { observer } from 'mobx-react';
+import { YouTube, Kettle, VimeoPlayer } from 'kettle-corn';
 import VideoData from './VideoData';
 import CommentaryData, { Commentary } from './CommentaryData';
 import CommentaryView from './CommentaryView';
@@ -10,6 +11,7 @@ import CompleteButton from './CompleteButton';
 import CompleteData from './CompleteButton/CompleteData';
 import Slides from './Slides';
 import SlideData from './Slides/Data';
+import VideoPicker from './VideoPicker';
 
 useStrict(true);
 
@@ -87,14 +89,17 @@ const slides = [
   },
 ];
 
+@observer
 class App extends React.Component {
   private kettle: Kettle;
+  private videoPicker: VideoPicker;
   private commentary: CommentaryData;
   private completeData: CompleteData;
   private slideData: SlideData;
 
   constructor(props: {}) {
     super(props);
+    this.videoPicker = new VideoPicker();
     this.kettle = new Kettle();
     this.commentary = new CommentaryData(this.kettle, commentaries);
     this.completeData = new CompleteData(this.kettle);
@@ -111,12 +116,33 @@ class App extends React.Component {
         <p className="App-intro">
           To get started, edit <code>src/App.tsx</code> and save to reload.
         </p>
+        <div className="App-switcher">
+          <button onClick={() => this.videoPicker.youTube()}>YouTube</button>
+          <button onClick={() => this.videoPicker.vimeo()}>Vimeo</button>
+        </div>
         <div className="container">
           <div>
             <SkipBack kettle={this.kettle} />
             <CompleteButton store={this.completeData} />
             <VideoData kettle={this.kettle} />
-            <YouTube id="mah-video" className="vid" videoId="2xF1GYDqwpM" kettle={this.kettle} />
+            {this.videoPicker.source.cata({
+              youtube: () => (
+                <YouTube
+                  id="mah-video"
+                  className="vid"
+                  videoId="2xF1GYDqwpM"
+                  kettle={this.kettle}
+                />
+              ),
+              vimeo: () => (
+                <VimeoPlayer
+                  id="mah-video"
+                  className="vid"
+                  videoId={224651200}
+                  kettle={this.kettle}
+                />
+              ),
+            })}
           </div>
           <div>
             <CommentaryView commentary={this.commentary} />
