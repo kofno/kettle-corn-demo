@@ -2900,9 +2900,9 @@ jsprim@^1.2.2:
     json-schema "0.2.3"
     verror "1.10.0"
 
-kettle-corn@^1.1.2:
-  version "1.1.2"
-  resolved "https://registry.yarnpkg.com/kettle-corn/-/kettle-corn-1.1.2.tgz#f4f94d5516e0271a74af57e5dd476c1e2c77e80b"
+kettle-corn@^1.1.4:
+  version "1.1.4"
+  resolved "https://registry.yarnpkg.com/kettle-corn/-/kettle-corn-1.1.4.tgz#dd395782138b3623c0079866e9af4769b010d371"
   dependencies:
     maybeasy "^1.1.1"
     mobx "^3.2.2"
