@@ -1,6 +1,5 @@
 import * as React from 'react';
 import './App.css';
-import { useStrict } from 'mobx';
 import { observer } from 'mobx-react';
 import { YouTube, Kettle, VimeoPlayer } from 'kettle-corn';
 import VideoData from './VideoData';
@@ -12,8 +11,6 @@ import CompleteData from './CompleteButton/CompleteData';
 import Slides from './Slides';
 import SlideData from './Slides/Data';
 import VideoPicker from './VideoPicker';
-
-useStrict(true);
 
 const logo = require('./logo.svg');
 
