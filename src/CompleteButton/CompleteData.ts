@@ -9,7 +9,7 @@ class CompleteData {
       () => {
         return kettle.videoState.position
           .andThen(pos => kettle.videoState.duration.map(dur => dur - 10 < pos))
-          .getOrElse(false);
+          .getOrElseValue(false);
       },
       () => {
         this.enable();

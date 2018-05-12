@@ -14,16 +14,16 @@ const VideoData: React.StatelessComponent<Props> = ({ kettle }): JSX.Element => 
     playing: ({ position, duration }) => {
       return (
         <div>
-          <div>Playing: {position.map(n => n.toFixed(0)).getOrElse('unknown')}</div>
-          <div>Length: {duration.map(n => n.toFixed(0)).getOrElse('unknown')}</div>
+          <div>Playing: {position.map(n => n.toFixed(0)).getOrElseValue('unknown')}</div>
+          <div>Length: {duration.map(n => n.toFixed(0)).getOrElseValue('unknown')}</div>
         </div>
       );
     },
     paused: ({ position, duration }) => {
       return (
         <div>
-          <div>Paused: {position.map(n => n.toFixed(0)).getOrElse('unknown')}</div>
-          <div>Length: {duration.map(n => n.toFixed(0)).getOrElse('unknown')}</div>
+          <div>Paused: {position.map(n => n.toFixed(0)).getOrElseValue('unknown')}</div>
+          <div>Length: {duration.map(n => n.toFixed(0)).getOrElseValue('unknown')}</div>
         </div>
       );
     },

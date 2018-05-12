@@ -32,7 +32,7 @@ class Data {
   }
 
   isCurrent(candidate: Slide): boolean {
-    return this.current.map(s => candidate.id === s.id).getOrElse(false);
+    return this.current.map(s => candidate.id === s.id).getOrElseValue(false);
   }
 
   @action

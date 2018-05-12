@@ -31,7 +31,7 @@ class CommentaryData {
     return this.kettle.videoState.position
       .map(pos => isCurrent(pos))
       .map(fn => this.commentaries.filter(fn).sort(revSort))
-      .getOrElse([]);
+      .getOrElseValue([]);
   }
 }
 
